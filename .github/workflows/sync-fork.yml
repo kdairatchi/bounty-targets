@@ -1,0 +1,26 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # Runs hourly
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout your fork's repository
+      - name: Checkout Fork
+        uses: actions/checkout@v3
+        with:
+          repository: <your-username>/bounty-targets
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 2: Add Upstream Repository
+      - name: Add Upstream
+        run: |
+          git remote add upstream https://github.com/arkadiyt/bounty-targets.git
+          git fetch upstream
+          git checkout main
+          git merge upstream/main
+          git push origin main
