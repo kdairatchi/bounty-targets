@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Fork
         uses: actions/checkout@v3
         with:
-          repository: <your-username>/bounty-targets
+          repository: kdairatchi/bounty-targets
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 2: Add Upstream Repository
